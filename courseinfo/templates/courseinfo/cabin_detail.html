@@ -1,0 +1,67 @@
+{% extends 'courseinfo/base.html' %}
+
+{% block title %}
+    Cabin - {{ cabin }}
+{% endblock %}
+
+{% block content %}
+    <article>
+        <div class="row">
+            <div class="offset-by-two eight columns">
+                <h2>{{ cabin }}</h2>
+                <ul class="inline">
+                    {% if perms.courseinfo.change_cabin %}
+                    <li>
+                        <a href="{{ cabin.get_update_url }}"
+                           class="button button-primary">
+                            Edit Cabin</a></li>
+                    {% endif %}
+                {% if perms.courseinfo.delete_cabin %}
+                    <li>
+                        <a href="{{ cabin.get_delete_url }}"
+                           class="button button-primary">
+                            Delete Cabin</a></li>
+                {% endif %}
+                </ul>
+
+                   <cabin>
+        <table>
+            <tr>
+                <th>Course:</th>
+                <td><a href="{{ course.get_absolute_url }}">{{ course }}</a></td>
+            </tr>
+            <tr>
+                <th>Cabin Name:</th>
+                <td>{{ cabin.cabin_name }}</td>
+            </tr>
+            <tr>
+                <th>Semester:</th>
+                <td><a href="{{ semester.get_absolute_url }}">{{ semester }}</a></td>
+            </tr>
+
+            <tr>
+                <th>Counselor:</th>
+                <td><a href="{{ counselor.get_absolute_url }}">{{ counselor }}</a></td>
+            </tr>
+        </table>
+
+    </cabin>
+
+    <cabin>
+        <h3>Registrations</h3>
+        <ul>
+            {% for registration in registration_list %}
+                <li>
+                    <a href="{{ registration.get_absolute_url }}">{{ registration.student }}</a>
+                </li>
+            {% empty %}
+                <li><em>There are currently no students registered for this cabin.</em></li>
+            {% endfor %}
+        </ul>
+    </cabin>
+
+            </div>
+        </div> <!-- row -->
+
+    </article>
+{% endblock %}

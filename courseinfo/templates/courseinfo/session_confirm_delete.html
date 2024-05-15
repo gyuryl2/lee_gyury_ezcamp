@@ -1,0 +1,21 @@
+{% extends 'courseinfo/base.html' %}
+
+{% block title %}
+    Delete Session
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{{ session.get_delete_url }}"
+        method="post">
+        {% csrf_token %}
+        <p>
+            Are you sure that you want to delete
+            session {{ session }}?
+        </p>
+        <a href="{{ session.get_absolute_url }}"
+           class="button button-primary">
+            Cancel</a>
+        <button type="submit" class="button button-primary">Delete Session</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'courseinfo/base.html' %}
+
+{% block title %}
+    Camper - {{ camper }}
+{% endblock %}
+
+{% block content %}
+<article>
+  <div class="row">
+  <div class="offset-by-two eight columns">
+    <h2>{{ camper }}</h2>
+    <ul class="inline">
+        {% if perms.courseinfo.change_camper %}
+        <li>
+          <a href="{{ camper.get_update_url }}"
+          class="button button-primary">
+            Edit Camper</a></li>
+        {% endif %}
+        {% if perms.courseinfo.delete_camper %}
+          <a href="{{ camper.get_delete_url }}"
+          class="button button-primary">
+            Delete Camper</a></li>
+        {% endif %}
+    </ul>
+    <section>
+        <table>
+            <tr>
+                <th>First Name:</th>
+                <td>{{ camper.first_name }}</td>
+            </tr>
+            <tr>
+                <th>Last Name:</th>
+                <td>{{ camper.last_name }}</td>
+            </tr>
+            {% if camper.disambiguator %}
+                <tr>
+                    <th>Disambiguator:</th>
+                    <td>{{ camper.disambiguator }}</td>
+                </tr>
+            {% endif %}
+        </table>
+    </section>
+
+    <section>
+        <h3>Registrations</h3>
+        <ul>
+            {% for registration in registration_list %}
+                <li>
+                    <a href="{{ registration.get_absolute_url }}">{{ registration.section }}</a>
+                </li>
+            {% empty %}
+                <li><em>This camper is not currently registered for any sections.</em></li>
+            {% endfor %}
+        </ul>
+    </section>
+
+  </div></div> <!-- row -->
+
+</article>
+{% endblock %}

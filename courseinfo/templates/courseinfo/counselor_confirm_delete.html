@@ -1,0 +1,21 @@
+{% extends 'courseinfo/base.html' %}
+
+{% block title %}
+    Delete Counselor
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{{ counselor.get_delete_url }}"
+        method="post">
+        {% csrf_token %}
+        <p>
+            Are you sure that you want to delete
+            counselor {{ counselor }}?
+        </p>
+        <a href="{{ counselor.get_absolute_url }}"
+           class="button button-primary">
+        Cancel</a>
+        <button type="submit" class="button button-primary">Delete Counselor</button>
+    </form>
+{% endblock %}

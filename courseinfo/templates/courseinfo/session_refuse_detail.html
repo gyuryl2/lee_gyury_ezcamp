@@ -1,0 +1,25 @@
+{% extends 'courseinfo/base.html' %}
+
+{% block title %}
+    Error Deleting Session
+{% endblock %}
+
+{% block content %}
+    <div>
+        <h2>Error Deleting Session</h2>
+        <p>
+            You may not delete session {{ session }}.  The following cabins
+            are to be taught during this current session:
+        </p>
+
+        <ul>
+            {% for cabin in cabins %}
+            <li><a href="{{ cabin.get_absolute_url }}">{{ cabin }}</a></li>
+            {%  endfor %}
+        </ul>
+
+        <p>
+            Return to <a href="{% url 'courseinfo_session_list_urlpattern' %}">Session List</a>.
+        </p>
+    </div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'courseinfo/base.html' %}
+
+{% block title %}
+    Cabin List
+{% endblock %}
+
+{% block create_button %}
+    {% if perms.courseinfo.add_cabin %}
+        <a
+                href="{% url 'courseinfo_cabin_create_urlpattern' %}"
+                class="button button-primary">
+            Create New Cabin</a>
+    {% endif %}
+{% endblock %}
+
+{% block org_content %}
+    <h2>Cabin List</h2>
+    {% if perms.courseinfo.add_cabin %}
+        <div class="mobile">
+            <a
+                    href="{% url 'courseinfo_cabin_create_urlpattern' %}"
+                    class="button button-primary">
+                Create New Cabin</a>
+        </div>
+    {% endif %}
+    <ul>
+        {% for cabin in cabin_list %}
+            <li>
+                <a href="{{ cabin.get_absolute_url }}">
+                    {{ cabin }}</a>
+            </li>
+        {% empty %}
+            <li><em>There are currently no cabins available.</em></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

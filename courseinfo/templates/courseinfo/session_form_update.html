@@ -1,0 +1,15 @@
+{% extends 'courseinfo/base.html' %}
+
+{% block title %}
+    Update Session
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{{ session.get_update_url }}"
+        method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button button-primary">Update Session</button>
+    </form>
+{% endblock %}

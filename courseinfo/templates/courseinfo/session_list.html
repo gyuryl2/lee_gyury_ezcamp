@@ -1,0 +1,36 @@
+{% extends 'courseinfo/base.html' %}
+
+{% block title %}
+    Session List
+{% endblock %}
+
+{% block create_button %}
+    {% if perms.courseinfo.add_session %}
+        <a
+                href="{% url 'courseinfo_session_create_urlpattern' %}"
+                class="button button-primary">
+            Create New Session</a>
+    {% endif %}
+{% endblock %}
+
+{% block org_content %}
+    <h2>Session List</h2>
+    {% if perms.courseinfo.add_session %}
+        <div class="mobile">
+            <a
+                    href="{% url 'courseinfo_session_create_urlpattern' %}"
+                    class="button button-primary">
+                Create New Session</a>
+        </div>
+    {% endif %}
+    <ul>
+        {% for session in session_list %}
+            <li>
+                <a href="{{ session.get_absolute_url }}">
+                    {{ session }}</a>
+            </li>
+        {% empty %}
+            <li><em>There are currently no sessions available.</em></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

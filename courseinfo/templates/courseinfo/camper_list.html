@@ -1,0 +1,36 @@
+{% extends 'courseinfo/base.html' %}
+
+{% block title %}
+    Camper List
+{% endblock %}
+
+{% block create_button %}
+    {% if perms.courseinfo.add_camper %}
+    <a
+        href="{% url 'courseinfo_camper_create_urlpattern'  %}"
+        class="button button-primary">
+      Create New Camper</a>
+    {% endif %}
+{% endblock %}
+
+{% block org_content %}
+  <h2>Camper List</h2>
+    {% if perms.courseinfo.add_camper %}
+    <div class="mobile">
+      <a
+          href="{% url 'courseinfo_camper_create_urlpattern' %}"
+          class="button button-primary">
+        Create New Camper</a>
+    </div>
+    {% endif %}
+  <ul>
+    {% for camper in camper_list %}
+      <li>
+        <a href="{{ camper.get_absolute_url }}">
+          {{ camper }}</a>
+      </li>
+    {% empty %}
+      <li><em>There are currently no campers available.</em></li>
+    {% endfor %}
+  </ul>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'courseinfo/base.html' %}
+
+{% block title %}
+    Counselor List
+{% endblock %}
+
+{% block create_button %}
+    {% if perms.courseinfo.add_counselor %}
+        <a
+                href="{% url 'courseinfo_counselor_create_urlpattern' %}"
+                class="button button-primary">
+            Create New Counselor</a>
+    {% endif %}
+{% endblock %}
+
+{% block org_content %}
+    <h2>Counselor List</h2>
+    {% if perms.courseinfo.add_counselor %}
+        <div class="mobile">
+            <a
+                    href="{% url 'courseinfo_counselor_create_urlpattern' %}"
+                    class="button button-primary">
+                Create New Counselor</a>
+        </div>
+    {% endif %}
+    <ul>
+        {% for counselor in counselor_list %}
+            <li>
+                <a href="{{ counselor.get_absolute_url }}">
+                    {{ counselor }}</a>
+            </li>
+        {% empty %}
+            <li><em>There are currently no counselors available.</em></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+
+

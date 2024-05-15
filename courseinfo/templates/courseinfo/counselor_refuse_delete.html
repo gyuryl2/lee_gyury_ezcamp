@@ -1,0 +1,26 @@
+{% extends 'courseinfo/base.html' %}
+
+{% block title %}
+    Error Deleting Counselor
+{% endblock %}
+
+{% block content %}
+    <div>
+        <h2>Error Deleting Counselor</h2>
+        <p>
+            You may not delete counselor {{ counselor }}.  This
+            counselor is currently assigned to the following
+            sections:
+        </p>
+
+        <ul>
+            {% for section in sections %}
+            <li><a href="{{ section.get_absolute_url }}">{{ section }}</a></li>
+            {%  endfor %}
+        </ul>
+
+        <p>
+            Return to <a href="{% url 'courseinfo_counselor_list_urlpattern' %}">Counselor List</a>.
+        </p>
+    </div>
+{% endblock %}

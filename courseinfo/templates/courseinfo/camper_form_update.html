@@ -1,0 +1,15 @@
+{% extends 'courseinfo/base.html' %}
+
+{% block title %}
+    Update Camper
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{{ camper.get_update_url }}"
+        method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button button-primary">Update Camper</button>
+    </form>
+{% endblock %}

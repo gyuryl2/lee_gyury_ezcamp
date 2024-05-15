@@ -1,0 +1,51 @@
+{% extends 'courseinfo/base.html' %}
+
+{% block title %}
+    Session - {{ session }}
+{% endblock %}
+
+{% block content %}
+    <article>
+        <div class="row">
+            <div class="offset-by-two eight columns">
+                <h2>{{ session }}</h2>
+                <ul class="inline">
+                    {% if perms.courseinfo.change_session %}
+                        <li>
+                            <a href="{{ session.get_update_url }}"
+                               class="button button-primary">
+                                Edit Session</a></li>
+                    {% endif %}
+                    {% if perms.courseinfo.delete_session %}
+                        <a href="{{ session.get_delete_url }}"
+                           class="button button-primary">
+                            Delete Session</a></li>
+                    {% endif %}
+                </ul>
+                <section>
+                    <table>
+                        <tr>
+                            <th>Session Name:</th>
+                            <td>{{ session }}</td>
+                        </tr>
+                    </table>
+                </section>
+
+                <section>
+                    <h3>Cabins</h3>
+                    <ul>
+                        {% for cabin in cabin_list %}
+                            <li>
+                                <a href="{{ cabin.get_absolute_url }}">{{ cabin }}</a>
+                            </li>
+                        {% empty %}
+                            <li><em>There are currently no cabins for this session.</em></li>
+                        {% endfor %}
+                    </ul>
+                </section>
+
+            </div>
+        </div> <!-- row -->
+
+    </article>
+{% endblock %}
